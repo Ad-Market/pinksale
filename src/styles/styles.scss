@@ -1,0 +1,390 @@
+@import "./colors";
+@import "./utilities";
+
+* {
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  color: $color3;
+}
+
+body {
+  font-weight: 400;
+  font-size: 14px;
+  padding-top: 72px;
+}
+
+.dark-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: 0.4s ease;
+
+  &.close {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media screen and (min-width: 768px) {
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+}
+
+a {
+  transition: 0.4s ease;
+
+  &:hover {
+    color: $color1;
+  }
+
+  &.inv {
+    color: $color1;
+
+    &:hover {
+      color: $color3;
+    }
+  }
+}
+
+button {
+  transition: 0.4s ease;
+}
+
+.text-pink {
+  color: $color1;
+}
+
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  z-index: 5;
+  padding: 0 24px;
+
+  .menu {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+
+    .hamburger {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      &.open {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    &.open {
+      .hamburger {
+        &.close {
+          opacity: 0;
+        }
+
+        &.open {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .logo {
+    width: 36px;
+    margin-left: 8px;
+    margin-right: 10px;
+  }
+}
+
+#main-layout {
+  display: flex;
+  height: calc(100vh - 72px);
+
+  #sidenav {
+    width: 200px;
+    flex-shrink: 0;
+    background-color: $color2;
+    transition: 0.4s ease;
+
+    @media screen and (max-width: 767px) {
+      width: unset;
+      position: fixed;
+      height: 100%;
+      background-color: transparent;
+      z-index: 5;
+    }
+
+    @media screen and (max-width: 575px) {
+      position: fixed;
+      width: 200px !important;
+      left: 0;
+    }
+
+    .nav {
+      position: relative;
+      padding-top: 1px;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 5;
+      transition: 0.4s ease;
+
+      @media screen and (max-width: 767px) {
+        width: 100%;
+      }
+
+      .item {
+        padding: 0 24px;
+        margin: 4px 0 0;
+        border-right: 3px solid transparent;
+
+        .item-main {
+          display: flex;
+          align-items: center;
+
+          .img {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+
+            img {
+              transition: 0.2s ease;
+            }
+          }
+
+          .text {
+            margin-left: 16px;
+            font-size: 14px;
+            border-bottom: 1px solid $color5;
+            padding: 8px 0;
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: 0.4s ease;
+          }
+
+          &:hover {
+            .img {
+              img {
+                filter: invert(56%) sepia(48%) saturate(4216%)
+                  hue-rotate(306deg) brightness(96%) contrast(104%);
+              }
+            }
+
+            .text {
+              color: $color1;
+            }
+          }
+        }
+      }
+    }
+
+    &.close {
+      @media screen and (max-width: 575px) {
+        left: -200px;
+      }
+
+      .nav {
+        width: 70px;
+
+        .text {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+
+  #right-main {
+    flex-grow: 1;
+    padding: 40px 20px;
+    margin-top: 40px;
+    background-color: $color2;
+    overflow-y: auto;
+
+    @media screen and (max-width: 767px) {
+      padding-left: 90px;
+    }
+
+    @media screen and (max-width: 575px) {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    #main-content {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.trending {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 72px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding-left: 200px;
+  overflow-x: auto;
+  @extend %horizontal-scrollbar;
+
+  @media screen and (max-width: 767px) {
+    padding-left: 90px;
+  }
+
+  @media screen and (max-width: 575px) {
+    padding-left: 12px;
+  }
+
+  .main {
+    display: flex;
+    align-items: center;
+    min-width: 1020px;
+
+    .item {
+      padding: 10px;
+
+      &:nth-child(2) {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+#landing {
+  .card {
+    position: relative;
+
+    .incoming {
+      display: flex;
+      align-items: center;
+      background-color: $color16;
+      color: $color17;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 20px;
+      margin-left: 20px;
+
+      @media screen and (max-width: 767px) {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+      }
+
+      img {
+        margin-right: 4px;
+      }
+    }
+
+    p {
+      word-break: break-all;
+    }
+
+    img.coin-icon {
+      margin-right: 16px;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 1px solid $color5;
+    }
+
+    .share {
+      a {
+        margin-right: 1rem;
+
+        img {
+          width: 20px;
+          filter: invert(56%) sepia(48%) saturate(4216%) hue-rotate(306deg)
+            brightness(96%) contrast(104%);
+          transition: 0.2s ease;
+        }
+
+        &:hover {
+          img {
+            filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(18deg)
+              brightness(93%) contrast(103%);
+          }
+        }
+      }
+    }
+
+    table {
+      margin-top: 48px;
+
+      tr {
+        border-bottom: 1px solid $color5;
+
+        td,
+        th {
+          padding: 8px 0;
+
+          &:first-child {
+            padding-right: 1rem;
+          }
+
+          @media screen and (max-width: 600px) {
+            max-width: 200px;
+            word-break: break-all;
+          }
+
+          a {
+            @extend %inv;
+          }
+        }
+      }
+    }
+
+    .collapse {
+      table {
+        tr {
+          td {
+            text-align: center;
+
+            .copy {
+              width: 14px;
+              margin-left: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .card.buy {
+    .alert {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.copyright {
+  max-width: 75%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 15px;
+  margin-top: 50px;
+
+  @media screen and (max-width: 575px) {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+}
